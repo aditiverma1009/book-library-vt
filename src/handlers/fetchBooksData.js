@@ -1,7 +1,7 @@
 const axios = require('axios');
 const {formatData, mergeData} = require('../utils/index.js')
 
-function fetchBooksData() {
+function fetchBooksData(toBeFormatted) {
         return axios({
         method: 'get',
         url: 'https://5gj1qvkc5h.execute-api.us-east-1.amazonaws.com/dev/allBooks',
@@ -25,8 +25,8 @@ function fetchBooksData() {
         })
         .then((bookAndRatingData)=> {
             const mergedBookRatingData = mergeData(bookAndRatingData.books, bookAndRatingData.rating)
-            const formattedData = formatData(mergedBookRatingData)
-            return formattedData
+            return toBeFormatted? formatData(mergedBookRatingData) : mergedBookRatingData
+            
         })
         .catch((err) => {
            throw new Error('Something went wrong', err)

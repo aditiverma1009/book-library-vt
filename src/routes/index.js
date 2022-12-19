@@ -1,5 +1,7 @@
 const express = require('express')
-const {fetchBooksData} = require('../handlers/fetchBooksData')
+const { fetchBooksData } = require('../handlers/fetchBooksData')
+const { saveBooksToDB } = require('../handlers/saveBooksToDB')
+
 const router = express.Router()
 
 // common middleware time logger
@@ -13,17 +15,25 @@ router.get('/groupByAuthors', (request, response, next) => {
     next()
 }, (request, response) => {
     try {
-        fetchBooksData().then((groupedData)=>{
+        const isFormatted = true;
+        fetchBooksData(isFormatted).then((groupedData) => {
             response.status(200).send(groupedData)
         })
-    } catch(err) {
+    } catch (err) {
         response.status(500).send('Something broke!')
     }
 })
 
 router.get('/saveBooks', (request, response) => {
-    response.send('save Books')
-    
+    try {
+        // save books to db only if db has no books
+        fetchBooksData(false).
+        saveBooksToDB().then((allBooks) => {
+            response.status(201).send(allBooks)
+        })
+    } catch (err) {
+        response.status(500).send('Something broke! Books could not be saved')
+    }
 })
 
 router.post('/book/:book/like/:like', (request, response) => {

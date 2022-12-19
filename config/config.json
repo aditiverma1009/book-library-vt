@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "node_demo",
+    "password": "node_demo",
+    "database": "node_demo_development",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "node_demo",
+    "password": "node_demo",
+    "database": "node_demo_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "node_demo",
+    "password": "node_demo",
+    "database": "node_demo_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
