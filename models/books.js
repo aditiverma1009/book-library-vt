@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     book_id: { type: DataTypes.INTEGER, primaryKey: true },
     name: DataTypes.STRING,
     author: DataTypes.STRING,
-    rating: DataTypes.INTEGER
+    rating: DataTypes.INTEGER,
+    likeUnlike: { type: DataTypes.BOOLEAN, defaultValue: false }
   }, {
     sequelize,
     modelName: 'Books',

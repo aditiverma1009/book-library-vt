@@ -1,6 +1,7 @@
 const express = require('express')
 const { fetchBooksData } = require('../handlers/fetchBooksData')
 const { saveBooksToDB } = require('../handlers/saveBooksToDB')
+const { saveLikeUnlike } = require('../handlers/saveLikeUnlike')
 
 const router = express.Router()
 
@@ -27,17 +28,24 @@ router.get('/groupByAuthors', (request, response, next) => {
 router.get('/saveBooks', (request, response) => {
     try {
         // save books to db only if db has no books
-        fetchBooksData(false).
-        saveBooksToDB().then((allBooks) => {
-            response.status(201).send(allBooks)
-        })
+        fetchBooksData(false).then((data) => {
+            if (data.length == 0) {
+                saveBooksToDB().then((allBooks) => {
+                    response.status(201).send(allBooks)
+                })
+            }
+        });
     } catch (err) {
         response.status(500).send('Something broke! Books could not be saved')
     }
 })
 
-router.post('/book/:book/like/:like', (request, response) => {
-    console.log(`book ${request.params.book}, like ${request.params.like}`)
+router.post('/book/:book_id/like/:like', (request, response) => {
+    try {
+        saveLikeUnlike(request.params.book_id, request.params.like)
+    } catch (err) {
+        response.status(500).send('Something broke!')
+    }
     response.send('Like/ Unlike')
 })
 

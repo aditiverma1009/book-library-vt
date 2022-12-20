@@ -11,7 +11,8 @@ function saveBooksToDB(isFormatted) {
                     author: eachData.Author,
                     book_id: eachData.id,
                     name: eachData.Name,
-                    rating: parseInt(eachData.rating)
+                    rating: parseInt(eachData.rating),
+                    likeUnlike: 0
                 }
             }))
         })
