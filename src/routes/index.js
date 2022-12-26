@@ -1,7 +1,7 @@
 const express = require('express');
-const { fetchBooksData } = require('../handlers/fetchBooksData');
-const { saveBooksToDB } = require('../handlers/saveBooksToDB');
-const { saveLikeUnlike } = require('../handlers/saveLikeUnlike');
+const { fetchBooksData } = require('../controllers/fetchBooksData');
+const { saveBooksToDB } = require('../controllers/saveBooksToDB');
+const { saveLikeUnlike } = require('../controllers/saveLikeUnlike');
 
 const router = express.Router();
 
