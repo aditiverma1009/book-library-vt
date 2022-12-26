@@ -1,22 +1,21 @@
-'use strict';
 const {
   Model
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class Books extends Model {
-    static associate(models) {
+    static associate() {
     }
   }
   Books.init({
-    book_id: { type: DataTypes.INTEGER, primaryKey: true },
+    bookId: { type: DataTypes.INTEGER, primaryKey: true },
     name: DataTypes.STRING,
     author: DataTypes.STRING,
     rating: DataTypes.INTEGER,
     likeUnlike: { type: DataTypes.BOOLEAN, defaultValue: false }
   }, {
     sequelize,
-    modelName: 'Books',
+    modelName: 'Books'
   });
   return Books;
 };
