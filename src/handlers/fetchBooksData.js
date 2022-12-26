@@ -1,4 +1,5 @@
 const axios = require('axios');
+const { ALL_BOOKS_URL, BOOK_RATING } = require('../constants');
 const { formatData, mergeData } = require('../utils/index');
 
 // seperate out fns for api call, by passing url and callback fn to it
@@ -12,14 +13,14 @@ const { formatData, mergeData } = require('../utils/index');
 function fetchBooksData(toBeFormatted) {
   return axios({
     method: 'get',
-    url: 'https://5gj1qvkc5h.execute-api.us-east-1.amazonaws.com/dev/allBooks',
+    url: ALL_BOOKS_URL,
     headers: {
       'content-type': 'application/json'
     }
   })
     .then(({ data }) => Promise.all(data.books.map((eachBook) => axios({
       method: 'get',
-      url: `https://5gj1qvkc5h.execute-api.us-east-1.amazonaws.com/dev/findBookById/${eachBook.id}`,
+      url: `${BOOK_RATING}${eachBook.id}`,
       headers: {
         'content-type': 'application/json'
       }

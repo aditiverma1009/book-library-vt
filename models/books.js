@@ -8,11 +8,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Books.init({
-    bookId: { type: DataTypes.INTEGER, primaryKey: true },
+    book_id: { type: DataTypes.INTEGER, primaryKey: true },
     name: DataTypes.STRING,
     author: DataTypes.STRING,
     rating: DataTypes.INTEGER,
-    likeUnlike: { type: DataTypes.BOOLEAN, defaultValue: false }
+    like_unlike: { type: DataTypes.BOOLEAN, defaultValue: false },
   }, {
     sequelize,
     modelName: 'Books'
