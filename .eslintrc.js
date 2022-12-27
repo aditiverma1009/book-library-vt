@@ -18,6 +18,7 @@ module.exports = {
   ],
   rules: {
     'no-console': 'off',
+    'arrow-body-style': 0,
     indent: ['error', 2],
     quotes: [
       2,

@@ -11,7 +11,8 @@ const formatData = (data) => {
   return authorBasedData;
 };
 
-const mergeData = (books, rating) => books
-  .map((eachBook, index) => ({ ...eachBook, ...rating[index] }));
+const mergeData = (books, rating) => {
+  return books.map((eachBook, index) => ({ ...eachBook, ...rating[index] }));
+};
 
 module.exports = { formatData, mergeData };
