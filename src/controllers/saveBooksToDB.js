@@ -1,7 +1,7 @@
 const Model = require('../../models');
-const { fetchBooksData } = require('./fetchBooksData');
+const { fetchBooksDataController } = require('./fetchBooksData');
 
-const saveBooksToDB = () => fetchBooksData(false)
+const saveBooksToDBController = () => fetchBooksDataController(false)
   .then((data) => Model.Books.bulkCreate(data.map((eachData) => ({
     author: eachData.Author,
     book_id: eachData.id,
@@ -10,4 +10,4 @@ const saveBooksToDB = () => fetchBooksData(false)
     like_unlike: 0
   }))));
 
-module.exports = { saveBooksToDB };
+module.exports = { saveBooksToDBController };

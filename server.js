@@ -11,4 +11,6 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
-app.use(router);
+// app.use(router);
+
+router(app);
