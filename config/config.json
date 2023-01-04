@@ -1,9 +1,10 @@
 {
   "development": {
-    "username": "node_demo",
-    "password": "node_demo",
-    "database": "node_demo_development",
+    "username": "book_owner",
+    "password": "password",
+    "database": "bookdb",
     "host": "127.0.0.1",
+    "port": "5431",
     "dialect": "postgres"
   },
   "test": {

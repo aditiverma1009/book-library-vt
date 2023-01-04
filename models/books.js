@@ -6,6 +6,10 @@ module.exports = (sequelize, DataTypes) => {
   class Books extends Model {
     static associate() {
     }
+
+    static findAllBooksinOrder = () => {
+      console.log('a');
+    };
   }
   Books.init({
     book_id: { type: DataTypes.INTEGER, primaryKey: true },

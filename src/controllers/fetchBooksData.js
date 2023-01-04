@@ -4,7 +4,7 @@ const { formatData, mergeData } = require('../utils/index');
 
 // Always used modules, not require
 // use err, response convention and if value not used _
-// 0. routes structure change
+// 0. routes structure change => done
 // 1. Accept the book id as a path parameter and return all the book details without the book rating
 // 2. Accept the book Author name as a query parameter & return an array of book names by the author
 // 3. Generate swagger documentation autogenerate
@@ -12,9 +12,10 @@ const { formatData, mergeData } = require('../utils/index');
 // https://www.youtube.com/watch?v=eiSem0cqaN0
 // https://swagger.io/tools/swagger-codegen/
 // swagger-jsdoc
-// 4. send proper error
+// 4. send proper error => done
 // 5. use validation
 // 6. seperate out fns for api call, by passing url and callback fn to it
+// type orm , sequelise, prisma
 
 const getAllBooks = async () => axios({
   method: 'get',
