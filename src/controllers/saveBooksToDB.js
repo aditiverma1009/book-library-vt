@@ -1,7 +1,7 @@
 const Model = require('../../models');
 const { fetchBooksDataController } = require('./fetchBooksData');
 
-const saveBooksToDBController = () => fetchBooksDataController(false)
+const saveBooksToDBController = () => fetchBooksDataController(false, null)
   .then((data) => Model.Books.bulkCreate(data.map((eachData) => ({
     author: eachData.Author,
     book_id: eachData.id,

@@ -3,12 +3,12 @@ const { fetchBooksDataController } = require('../controllers/fetchBooksData');
 
 const groupByRouter = Router();
 
-groupByRouter.get('/groupByAuthors', (request, response, next) => {
+groupByRouter.get('/groupBy', (request, response, next) => {
   next();
-}, (_, response) => {
+}, (request, response) => {
   try {
     const isFormatted = true;
-    fetchBooksDataController(isFormatted).then((groupedData) => {
+    fetchBooksDataController(isFormatted, request.query.groupBy).then((groupedData) => {
       response.status(200).send(groupedData);
     });
   } catch (err) {

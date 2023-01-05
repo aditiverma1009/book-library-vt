@@ -1,11 +1,11 @@
-const formatData = (data) => {
+const formatData = (data, groupBy) => {
   const authorBasedData = {};
   data.forEach((element) => {
-    if (Object.keys(authorBasedData).indexOf(element.Author) !== -1) {
-      authorBasedData[element.Author].push(element);
+    if (Object.keys(authorBasedData).indexOf(element[groupBy]) !== -1) {
+      authorBasedData[element[groupBy]].push(element);
     } else {
-      authorBasedData[element.Author] = [];
-      authorBasedData[element.Author].push(element);
+      authorBasedData[element[groupBy]] = [];
+      authorBasedData[element[groupBy]].push(element);
     }
   });
   return authorBasedData;

@@ -17,24 +17,16 @@ const { formatData, mergeData } = require('../utils/index');
 // 6. seperate out fns for api call, by passing url and callback fn to it
 // type orm , sequelise, prisma
 
-const getAllBooks = async () => axios({
-  method: 'get',
-  url: ALL_BOOKS_URL,
-  headers: {
-    'content-type': 'application/json'
-  }
-});
+const getAllBooks = async () => {
+  return axios.get(ALL_BOOKS_URL);
+};
 
-const getRatingForBookID = async (id) => axios({
-  method: 'get',
-  url: `${BOOK_RATING}${id}`,
-  headers: {
-    'content-type': 'application/json'
-  }
-});
+const getRatingForBookID = async (id) => {
+  return axios.get(`${BOOK_RATING}${id}`);
+};
 
 // eslint-disable-next-line no-unused-vars
-const fetchBooksDataController = async (toBeFormatted) => {
+const fetchBooksDataController = async (toBeFormatted, groupBy) => {
   let allBooks = {};
   try {
     allBooks = await getAllBooks();
@@ -47,12 +39,13 @@ const fetchBooksDataController = async (toBeFormatted) => {
     const booksData = allBooks.data.books;
     // eslint-disable-next-line max-len
     ratingData = await Promise.all(booksData.map(async (eachBook) => getRatingForBookID(eachBook.id)));
+    console.log(ratingData);
   } catch (err) {
     throw new Error('Could not get rating for all books');
   }
   const formattedRating = ratingData.map((eachRating) => eachRating.data);
   const mergedBookRatingData = mergeData(allBooks.data.books, formattedRating);
-  return toBeFormatted ? formatData(mergedBookRatingData) : mergedBookRatingData;
+  return toBeFormatted ? formatData(mergedBookRatingData, groupBy) : mergedBookRatingData;
 };
 
 module.exports = { fetchBooksDataController };
