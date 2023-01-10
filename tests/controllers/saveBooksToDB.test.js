@@ -1,6 +1,8 @@
+import { ALL_BOOKS_URL, BOOK_RATING } from '../../src/constants';
+import { saveBooksToDBController } from '../../src/controllers/saveBooksToDB';
+import { mockBooksResponse } from './fetchBooksData.test';
+
 const axios = require('axios');
-const { ALL_BOOKS_URL, BOOK_RATING } = require('../../src/constants');
-const { fetchBooksDataController } = require('../../src/controllers/fetchBooksData');
 
 jest.mock('axios');
 
@@ -31,32 +33,25 @@ const books = {
   }
 };
 
-const mockBooksResponse = [{
-  Author: 'J K Rowling',
-  id: 30,
-  Name: 'Harry Potter and the Prisoner of Azkaban (Harry Potter, #3)',
-  rating: 5
-},
-{
-  Author: 'J K Rowling',
-  id: 40,
-  Name: 'Harry Potter and the Goblet of Fire (Harry Potter, #4)',
-  rating: 4.5
-},
-{
-  Author: 'Sidney Sheldon',
-  id: 90,
-  Name: 'Master of the Game',
-  rating: 4.5
-},
-{
-  Author: 'Sidney Sheldon',
-  id: 110,
-  Name: 'The Other Side of Midnight (Midnight #1)',
-  rating: 4.5
-}];
+jest.mock('../../models', () => {
+  const originalModule = jest.requireActual('../../models');
 
-describe('test for fetching data for books', () => {
+  return {
+    __esModule: true,
+    ...originalModule,
+    default: jest.fn(() => {
+      console.log('in here!!');
+      const booksMock = {
+        Books: {
+          bulkCreate: jest.fn(() => new Promise({ resolve: books }))
+        }
+      };
+      return booksMock;
+    })
+  };
+});
+
+describe('test save books to database', () => {
   axios.get
     .mockImplementation((url) => {
       switch (url) {
@@ -78,11 +73,8 @@ describe('test for fetching data for books', () => {
         });
       }
     });
-  it('should return list of book when not formatted', async () => {
-    expect((await fetchBooksDataController(false, 'Author'))).toEqual(mockBooksResponse);
+
+  it('should return success on creating data', async () => {
+    expect(await saveBooksToDBController()).toEqual(mockBooksResponse);
   });
 });
-
-module.exports = {
-  books, mockBooksResponse
-};

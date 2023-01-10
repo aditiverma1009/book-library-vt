@@ -1,5 +1,4 @@
 const { Router } = require('express');
-const { fetchBooksDataController } = require('../controllers/fetchBooksData');
 const { saveBooksToDBController } = require('../controllers/saveBooksToDB');
 const Model = require('../../models');
 

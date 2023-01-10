@@ -1,3 +1,5 @@
+jest.mock('axios');
+
 const formatData = (data, groupBy) => {
   const authorBasedData = {};
   data.forEach((element) => {
