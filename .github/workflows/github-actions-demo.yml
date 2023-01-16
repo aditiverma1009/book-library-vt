@@ -2,7 +2,7 @@ name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  run-shell-command:
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -25,3 +25,12 @@ jobs:
           import platform
           print(platform.processor())
         shell: python
+  
+  run-windows-command:
+    runs-on: windows-latest
+    steps:
+      - name: Directory power
+        run: Get-Location
+      - name: Directory bash
+        run: pwd
+        shell: bash
