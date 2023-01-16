@@ -6,10 +6,24 @@ jobs:
   run-github-actions:
     runs-on: ubuntu-latest
     steps: 
+      - name: Listing files
+        run: |
+          pwd
+          ls
+
+      - name: Checkout files
+        uses: actions/checkout@v1
+
+      - name: Listing files after checking out
+        run: |
+          pwd
+          ls
+
       - name: Simple Javascript Action
         id: simple-action
         uses: actions/hello-world-javascript-action@v1 #import action from github , it's a js file #https://github.com/actions/hello-world-javascript-action
         with:
           who-to-greet: Aditi
+          
       - name: Log the time
         run: echo "${{ step.simple-action.outputs.time }}"
