@@ -1,0 +1,10 @@
+name: Github actions workflow
+
+on: [push]
+
+jobs: 
+  run-github-actions:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: simple js action
+        uses: actions/hello-world-javascript-action #import action from github , it's a js file #https://github.com/actions/hello-world-javascript-action
